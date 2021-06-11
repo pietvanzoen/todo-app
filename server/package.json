@@ -1,0 +1,17 @@
+{
+  "name": "todo-app-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-sequelize-crud": "^6.1.5",
+    "morgan": "^1.10.0",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2"
+  }
+}
