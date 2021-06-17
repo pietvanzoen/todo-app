@@ -1,26 +1,15 @@
 <template>
   <form class="todo-list">
+
     <ul>
-      <div v-for="(todo, index) in todos" :key="`todo-${index}`" class="todo">
-        <input
-          class="checkbox"
-          type="checkbox"
-          v-model="todo.done"
-          />
-        <input
-          type="text"
-          placeholder="Todo title"
-          v-model="todo.title"
-          />
-        <button
-          type="button"
-          class="delete-button"
-          @click="deleteTodo(index)"
-          >
-          X
-        </button>
-      </div>
+      <TodoItem
+        v-for="(todo, index) in todos"
+        :todo="todo"
+        :key="index"
+        @delete="deleteTodo(index)"
+        />
     </ul>
+
     <button type="button" @click="addTodo">
       + New todo
     </button>
@@ -30,7 +19,13 @@
 </template>
 
 <script>
+import TodoItem from './TodoItem.vue';
+
 export default {
+  name: 'TodoList',
+  components: {
+    TodoItem
+  },
   data() {
     return {
       todos: [
