@@ -1,5 +1,22 @@
 {
+  "name": "todo-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:pietvanzoen/todo-app.git",
+  "author": "pietvanzoen <hi@piet.me>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "install": "run-p -l install:*",
+    "install:vue": "cd vue && yarn install",
+    "install:react": "cd react && yarn install",
+    "build": "run-p -l build:*",
+    "build:vue": "cd vue && PUBLIC_PATH=/vue yarn build",
+    "build:react": "cd react && PUBLIC_URL=/react yarn build",
+    "postbuild": "./build-pages.sh"
+  },
   "devDependencies": {
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.3.1"
   }
 }

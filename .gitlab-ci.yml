@@ -1,0 +1,27 @@
+image: "node:lts-alpine"
+
+stages:
+  - build
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - react/node_modules/
+    - vue/node_modules/
+
+yarn:install:
+  stage: build
+  script:
+    - yarn install --frozen-lockfile --check-files --non-interactive
+
+pages:
+  stage: deploy
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - pages
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
