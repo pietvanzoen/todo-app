@@ -1,30 +1,29 @@
-import express from 'express'
-import morgan from 'morgan';
-import sequelize from 'sequelize';
-import sqlzcrd from 'express-sequelize-crud'
-import { Todo } from './models.js'
+import express from "express";
+import morgan from "morgan";
+import sequelize from "sequelize";
+import sqlzcrd from "express-sequelize-crud";
+import { Todo } from "./models.js";
 
 const { crud, sequelizeCrud } = sqlzcrd;
 
-
-const app = express()
-app.use(morgan('dev'));
+const app = express();
+app.use(morgan("dev"));
 app.use(
-  crud('/todos', {
+  crud("/todos", {
     ...sequelizeCrud(Todo),
   })
-)
+);
 
 app.use(function (err, req, res, next) {
   if (err instanceof sequelize.ValidationError) {
-    res.status(400).json({ message: err.message })
+    res.status(400).json({ message: err.message });
     return;
   }
-  console.error(err.stack)
-  res.status(500).json({ message: 'Something broke!' })
-})
+  console.error(err.stack);
+  res.status(500).json({ message: "Something broke!" });
+});
 
-await Todo.sync()
+await Todo.sync();
 await app.listen(8080);
 
-console.log('Server started');
+console.log("Server started");
